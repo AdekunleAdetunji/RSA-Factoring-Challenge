@@ -5,12 +5,12 @@ import sys
 
 def factorize(n):
     if n % 2 == 0:
-        print("{}={}*{}".format(n, 2, n // 2))
+        print("{}={}*{}".format(n, n // 2, 2))
         return
 
     for factor in range(3, math.isqrt(n) + 1, 2):
         if n % factor == 0:
-            print("{}={}*{}".format(n, factor, n // factor))
+            print("{}={}*{}".format(n, n // factor, factor))
             break;
 
 with open(sys.argv[1], 'r') as file:
