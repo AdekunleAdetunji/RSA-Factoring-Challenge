@@ -9,15 +9,16 @@
  */
 void pollard_rho(mpz_t n)
 {
-	mpz_t two, x, y, d;
+	mpz_t two, x, y, d, z;
 
-	mpz_inits(two, x, y, d, NULL);
+	mpz_inits(two, x, y, d, z, NULL);
 	mpz_set_ui(two, 2);
 
 	if (mpz_divisible_p(n, two))
 	{
-		gmp_printf("%Zd=%Zd*%Zd\n", n, n, two);
-		mpz_clears(two, x, y, d, NULL);
+		mpz_div(z, n, two);
+		gmp_printf("%Zd=%Zd*%Zd\n", n, two, z);
+		mpz_clears(two, x, y, d, z, NULL);
 		return;
 	}
 
@@ -43,8 +44,9 @@ void pollard_rho(mpz_t n)
 		mpz_gcd(d, d, n);
 	}
 
-	gmp_printf("%Zd=%Zd*%Zd\n", n, d, n);
-	mpz_clears(two, x, y, d, NULL);
+	mpz_div(z, n, d);
+	gmp_printf("%Zd=%Zd*%Zd\n", n, d, z);
+	mpz_clears(two, x, y, d, z, NULL);
 }
 
 /**
